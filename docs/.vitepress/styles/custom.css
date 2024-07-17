@@ -1,0 +1,22 @@
+.hero-image {
+    position: relative;
+    display: inline-block;
+}
+
+.hero-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+}
+
+.hero-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(transparent, white 90%);
+    border-radius: 15px;
+    pointer-events: none; /* Ensures that the overlay does not block interactions */
+}
