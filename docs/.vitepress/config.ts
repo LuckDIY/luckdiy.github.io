@@ -5,16 +5,21 @@ export default defineConfig({
     title: 'luck_diy的小站',
     description: '描述',
 
+    head: [["link", { rel: "icon", href: "./主页.svg" }]],
+
     themeConfig: {
         // 主题级选项
+        outline:{label: '文章目录', level: [2,6]},
+        // sidebar: false, // 关闭侧边栏
+        aside: "left", // 设置右侧侧边栏在左侧显示
 
         // 上右导航栏
         nav: [
             {text: 'Guide', link: '/guide', activeMatch: '/guide/what-is-vitepress'},
             {
-                text: '下拉选择框',
+                text: 'Spring源码学习',
                 items: [
-                    {text: 'options-1', link: '/'},
+                    {text: 'BeanDefinition', link: '/Spring/BeanDefinition'},
                     {text: 'options-2', link: 'http://www.baidu.com'}
                 ]
             }
@@ -23,15 +28,28 @@ export default defineConfig({
         socialLinks: [{icon: "github", link: "https://github.com/LuckDIY"}],
 
 
+        // 设置搜索框的样式
+        search: {
+            provider: "local",
+            options: {
+                translations: {
+                    button: {
+                        buttonText: "搜索文档",
+                        buttonAriaLabel: "搜索文档",
+                    },
+                    modal: {
+                        noResultsText: "无法找到相关结果",
+                        resetButtonTitle: "清除查询条件",
+                        footer: {
+                            selectText: "选择",
+                            navigateText: "切换",
+                        },
+                    },
+                },
+            },
+        },
     },
 
-    // 引入自定义 CSS
-    /*css: {
-        preprocessorOptions: {
-            css: {
-                additionalData: `@import "./styles/custom.css";`
-            }
-        }
-    }*/
+
 
 });

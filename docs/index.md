@@ -2,7 +2,7 @@
 layout: home
 
 title: luck_diy
-titleTemplate: 一个Vue3组件库
+titleTemplate: 个人小破站
 
 hero:
   name: luck_diy的小站
