@@ -22,7 +22,13 @@ export default defineConfig({
                     {text: 'BeanDefinition', link: '/Spring/BeanDefinition'},
                     {text: 'options-2', link: 'http://www.baidu.com'}
                 ]
-            }
+            },
+            {text: '任务', items: [
+                    {text: '0722', link: '/task/0722'},
+                    {text: '0723', link: '/task/0723'}
+                ]
+            },
+
         ],
 
         socialLinks: [{icon: "github", link: "https://github.com/LuckDIY"}],
