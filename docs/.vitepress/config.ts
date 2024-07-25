@@ -25,7 +25,10 @@ export default defineConfig({
             },
             {text: '任务', items: [
                     {text: '0722', link: '/task/0722'},
-                    {text: '0723', link: '/task/0723'}
+                    {text: '0723', link: '/task/0723'},
+                    {text: '0724', link: '/task/0724'},
+                    {text: '0725', link: '/task/0725'},
+                    {text: '0726', link: '/task/0726'},
                 ]
             },
 
