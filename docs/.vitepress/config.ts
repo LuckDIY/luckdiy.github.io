@@ -30,7 +30,7 @@ export default defineConfig({
                     {text: '0725', link: '/task/0725'},
                     {text: '0726', link: '/task/0726'},
                     {text: '0729', link: '/task/0729'},
-                    {text: '0730.md', link: '/task/0730.md'},
+                    {text: '0730', link: '/task/0730'},
                     {text: '0731', link: '/task/0731'},
                     {text: '0801', link: '/task/0801'},
                     {text: '0802', link: '/task/0802'},
