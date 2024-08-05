@@ -34,7 +34,11 @@ export default defineConfig({
                     {text: '0731', link: '/task/0731'},
                     {text: '0801', link: '/task/0801'},
                     {text: '0802', link: '/task/0802'},
-                    {text: '0803', link: '/task/0803'},
+                    {text: '0805', link: '/task/0805'},
+                    {text: '0806', link: '/task/0806'},
+                    {text: '0807', link: '/task/0807'},
+                    {text: '0808', link: '/task/0808'},
+                    {text: '0809', link: '/task/0809'},
                 ]
             },
 
