@@ -9,7 +9,7 @@ hero:
   text: 个人生活｜学习
   tagline: 没啥特点仅供娱乐
   image:
-    src: ./home.jpg
+    src: ./无箱格.svg
     alt: luck_diy
     class: hero-image
   actions:

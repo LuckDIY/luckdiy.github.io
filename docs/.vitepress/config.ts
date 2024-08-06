@@ -1,15 +1,15 @@
-import { defineConfig } from 'vitepress';
+import {defineConfig} from 'vitepress';
 
 export default defineConfig({
     // 站点级选项
     title: 'luck_diy的小站',
     description: '描述',
 
-    head: [["link", { rel: "icon", href: "./主页.svg" }]],
+    head: [["link", {rel: "icon", href: "./主页.svg"}]],
 
     themeConfig: {
         // 主题级选项
-        outline:{label: '文章目录', level: [2,6]},
+        outline: {label: '文章目录', level: [2, 6]},
         // sidebar: false, // 关闭侧边栏
         aside: "left", // 设置右侧侧边栏在左侧显示
 
@@ -23,7 +23,8 @@ export default defineConfig({
                     {text: 'options-2', link: 'http://www.baidu.com'}
                 ]
             },
-            {text: '任务', items: [
+            {
+                text: '任务', items: [
                     {text: '0722', link: '/task/0722'},
                     {text: '0723', link: '/task/0723'},
                     {text: '0724', link: '/task/0724'},
@@ -41,6 +42,13 @@ export default defineConfig({
                     {text: '0809', link: '/task/0809'},
                 ]
             },
+            {
+                text: '工具',
+                items: [
+                    {text: 'JSON格式化', link: 'tools/json-formatter'},
+                ]
+            },
+
 
         ],
 
@@ -68,7 +76,6 @@ export default defineConfig({
             },
         },
     },
-
 
 
 });
