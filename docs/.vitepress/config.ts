@@ -15,7 +15,9 @@ export default defineConfig({
 
         // 上右导航栏
         nav: [
-            {text: 'Guide', link: '/guide', activeMatch: '/guide/what-is-vitepress'},
+            {
+                text: 'Guide',
+                link: '/guide', activeMatch: '/guide/what-is-vitepress'},
             {
                 text: 'Spring源码学习',
                 items: [
@@ -24,6 +26,12 @@ export default defineConfig({
                 ]
             },
             {
+                text: 'SSO单点登陆',
+                items: [
+                    {text: 'SAML', link: '/sso/saml'},
+                ]
+            },
+            /*{
                 text: '任务', items: [
                     {text: '0722', link: '/task/0722'},
                     {text: '0723', link: '/task/0723'},
@@ -41,7 +49,7 @@ export default defineConfig({
                     {text: '0808', link: '/task/0808'},
                     {text: '0809', link: '/task/0809'},
                 ]
-            },
+            },*/
             {
                 text: '工具',
                 items: [
