@@ -22,7 +22,7 @@ export default defineConfig({
                 text: 'Spring源码学习',
                 items: [
                     {text: 'BeanDefinition', link: '/Spring/BeanDefinition'},
-                    {text: 'options-2', link: 'http://www.baidu.com'}
+                    {text: 'SpringSecurity', link: '/Spring/SpringSecurity'}
                 ]
             },
             {
