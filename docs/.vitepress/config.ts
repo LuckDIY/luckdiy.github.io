@@ -17,18 +17,29 @@ export default defineConfig({
         nav: [
             {
                 text: 'Guide',
-                link: '/guide', activeMatch: '/guide/what-is-vitepress'},
+                link: '/guide', activeMatch: '/guide/what-is-vitepress'
+            },
             {
-                text: 'Spring源码学习',
+                text: 'java相关',
                 items: [
                     {text: 'BeanDefinition', link: '/Spring/BeanDefinition'},
-                    {text: 'SpringSecurity', link: '/Spring/SpringSecurity'}
+                    {text: 'SpringSecurity', link: '/Spring/SpringSecurity'},
+                    {text: 'SAML单点登录', link: '/sso/saml'}
                 ]
             },
             {
-                text: 'SSO单点登陆',
+                text: '操作系统学习',
                 items: [
-                    {text: 'SAML', link: '/sso/saml'},
+                    {text: '段描述符gdt', link: '/system/段描述符'},
+                    {text: '任务状态段TSS', link: '/system/TSS'},
+                    {text: '中断int', link: '/system/中断'},
+                    {text: 'elf', link: '/system/elf'},
+                    {text: '页表', link: '/system/页表'},
+                    {text: '输入系统', link: '/system/输入系统'},
+                    {text: '进程', link: '/system/进程'},
+                    {text: 'bochs调试', link: '/system/bochs调试'},
+
+
                 ]
             },
             /*{

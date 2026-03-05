@@ -31,3 +31,8 @@ features:
     title: 生活
     details: 日常生活
 ---
+<style module>
+.tagline{
+   background-color: red;
+}
+</style>
