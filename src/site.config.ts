@@ -4,13 +4,13 @@ const config: SiteConfig = {
   // Absolute URL to the root of your published site, used for generating links and sitemaps.
   site: 'https://luckdiy.github.io',
   // The name of your site, used in the title and for SEO.
-  title: 'luck_diy的小站',
+  title: 'luckLab',
   // The description of your site, used for SEO and RSS feed.
   description: '记录生活',
   // The author of the site, used in the footer, SEO, and RSS feed.
-  author: 'WangChaoLei',
+  author: 'luckLab',
   // Keywords for SEO, used in the meta tags.
-  tags: ['Astro', 'Terminal', 'Theme', 'MultiTerm', 'luck_diy'],
+  tags: ['Astro', 'Terminal', 'Theme', 'MultiTerm', 'luck_diy','luckLab'],
   // Path to the image used for generating social media previews.
   // Needs to be a square JPEG file due to limitations of the social card generator.
   // Try https://squoosh.app/ to easily convert images to JPEG.
