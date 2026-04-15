@@ -1,20 +1,57 @@
-import { defineCollection } from 'astro:content';
-import { glob } from 'astro/loaders';
-import { z } from 'astro/zod';
+import { defineCollection, z } from 'astro:content'
+import { glob } from 'astro/loaders'
 
-const blog = defineCollection({
-	// Load Markdown and MDX files in the `src/content/blog/` directory.
-	loader: glob({ base: './src/content/blog', pattern: '**/*.{md,mdx}' }),
-	// Type-check frontmatter using a schema
-	schema: ({ image }) =>
-		z.object({
-			title: z.string(),
-			description: z.string(),
-			// Transform string to Date object
-			pubDate: z.coerce.date(),
-			updatedDate: z.coerce.date().optional(),
-			heroImage: z.optional(image()),
-		}),
-});
+const postsCollection = defineCollection({
+  loader: glob({ pattern: ['**/*.md', '**/*.mdx'], base: './src/content/posts' }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      published: z.coerce.date(),
+      // updated: z.coerce.date().optional(),
+      draft: z.boolean().optional().default(false),
+      description: z.string().optional(),
+      author: z.string().optional(),
+      series: z.string().optional(),
+      tags: z.array(z.string()).optional().default([]),
+      coverImage: z
+        .strictObject({
+          src: image(),
+          alt: z.string(),
+        })
+        .optional(),
+      toc: z.boolean().optional().default(true),
+    }),
+})
 
-export const collections = { blog };
+const homeCollection = defineCollection({
+  loader: glob({ pattern: ['home.md', 'home.mdx'], base: './src/content' }),
+  schema: ({ image }) =>
+    z.object({
+      avatarImage: z
+        .object({
+          src: image(),
+          alt: z.string().optional().default('My avatar'),
+        })
+        .optional(),
+      githubCalendar: z.string().optional(), // GitHub username for calendar
+    }),
+})
+
+const addendumCollection = defineCollection({
+  loader: glob({ pattern: ['addendum.md', 'addendum.mdx'], base: './src/content' }),
+  schema: ({ image }) =>
+    z.object({
+      avatarImage: z
+        .object({
+          src: image(),
+          alt: z.string().optional().default('My avatar'),
+        })
+        .optional(),
+    }),
+})
+
+export const collections = {
+  posts: postsCollection,
+  home: homeCollection,
+  addendum: addendumCollection,
+}
