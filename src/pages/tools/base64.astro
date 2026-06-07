@@ -1,0 +1,203 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import PageHeader from '~/components/PageHeader.astro'
+---
+
+<Layout title="Base64 编解码" description="文本与 Base64 互转，支持 UTF-8 和 URL-safe 变体">
+  <PageHeader titlePieces={['tools', 'base64']} />
+
+  <section class="mt-6 flex flex-col gap-4">
+    <div class="flex flex-wrap items-center gap-2">
+      <button
+        id="b64-encode"
+        type="button"
+        class="text-accent border-1 border-accent/40 rounded-lg px-3 py-1.5 hover:bg-accent/10 transition-colors"
+      >
+        编码 →
+      </button>
+      <button
+        id="b64-decode"
+        type="button"
+        class="text-accent border-1 border-accent/40 rounded-lg px-3 py-1.5 hover:bg-accent/10 transition-colors"
+      >
+        ← 解码
+      </button>
+      <button
+        id="b64-swap"
+        type="button"
+        class="text-foreground/70 border-1 border-foreground/30 rounded-lg px-3 py-1.5 hover:bg-foreground/10 transition-colors"
+      >
+        交换
+      </button>
+      <label class="flex items-center gap-2 ml-auto text-sm">
+        <input id="b64-urlsafe" type="checkbox" class="accent-accent" />
+        URL-safe
+      </label>
+    </div>
+
+    <div class="grid gap-4 md:grid-cols-2">
+      <div class="flex flex-col gap-2">
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-foreground/70">原文</span>
+          <button
+            id="b64-clear-text"
+            type="button"
+            class="text-sm text-foreground/70 hover:text-accent"
+          >
+            清空
+          </button>
+        </div>
+        <textarea
+          id="b64-text"
+          spellcheck="false"
+          placeholder="在此输入要编码的文本…"
+          class="bg-transparent text-foreground border-1 border-foreground/40 rounded-xl p-3 font-mono text-sm min-h-[20rem] resize-y focus:outline-none focus:border-accent"
+        ></textarea>
+        <button
+          id="b64-copy-text"
+          type="button"
+          class="self-start text-sm text-foreground/70 hover:text-accent"
+        >
+          复制原文
+        </button>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-foreground/70">Base64</span>
+          <button
+            id="b64-clear-b64"
+            type="button"
+            class="text-sm text-foreground/70 hover:text-accent"
+          >
+            清空
+          </button>
+        </div>
+        <textarea
+          id="b64-b64"
+          spellcheck="false"
+          placeholder="在此粘贴要解码的 Base64…"
+          class="bg-transparent text-foreground border-1 border-foreground/40 rounded-xl p-3 font-mono text-sm min-h-[20rem] resize-y focus:outline-none focus:border-accent"
+        ></textarea>
+        <button
+          id="b64-copy-b64"
+          type="button"
+          class="self-start text-sm text-foreground/70 hover:text-accent"
+        >
+          复制 Base64
+        </button>
+      </div>
+    </div>
+
+    <div
+      id="b64-status"
+      class="text-sm min-h-[1.25rem] font-mono"
+      aria-live="polite"
+    >
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const txt = document.getElementById('b64-text') as HTMLTextAreaElement
+  const b64 = document.getElementById('b64-b64') as HTMLTextAreaElement
+  const urlSafe = document.getElementById('b64-urlsafe') as HTMLInputElement
+  const status = document.getElementById('b64-status') as HTMLDivElement
+
+  const setStatus = (msg: string, type: 'ok' | 'err' | '' = '') => {
+    status.textContent = msg
+    status.style.color =
+      type === 'ok'
+        ? 'var(--theme-green)'
+        : type === 'err'
+          ? 'var(--theme-red)'
+          : ''
+  }
+
+  const toBase64 = (s: string): string => {
+    const bytes = new TextEncoder().encode(s)
+    let bin = ''
+    for (const b of bytes) bin += String.fromCharCode(b)
+    let out = btoa(bin)
+    if (urlSafe.checked) {
+      out = out.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
+    }
+    return out
+  }
+
+  const fromBase64 = (s: string): string => {
+    let input = s.trim().replace(/\s+/g, '')
+    if (urlSafe.checked || /[-_]/.test(input)) {
+      input = input.replace(/-/g, '+').replace(/_/g, '/')
+    }
+    const pad = input.length % 4
+    if (pad) input += '='.repeat(4 - pad)
+    const bin = atob(input)
+    const bytes = new Uint8Array(bin.length)
+    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i)
+    return new TextDecoder('utf-8', { fatal: true }).decode(bytes)
+  }
+
+  document.getElementById('b64-encode')!.addEventListener('click', () => {
+    if (!txt.value) {
+      setStatus('请输入要编码的文本', 'err')
+      return
+    }
+    try {
+      b64.value = toBase64(txt.value)
+      setStatus('✓ 编码完成', 'ok')
+    } catch (e: any) {
+      setStatus(`✗ ${e.message}`, 'err')
+    }
+  })
+
+  document.getElementById('b64-decode')!.addEventListener('click', () => {
+    if (!b64.value) {
+      setStatus('请输入要解码的 Base64', 'err')
+      return
+    }
+    try {
+      txt.value = fromBase64(b64.value)
+      setStatus('✓ 解码完成', 'ok')
+    } catch (e: any) {
+      setStatus(`✗ 无效的 Base64：${e.message}`, 'err')
+    }
+  })
+
+  document.getElementById('b64-swap')!.addEventListener('click', () => {
+    const a = txt.value
+    txt.value = b64.value
+    b64.value = a
+    setStatus('已交换两侧内容')
+  })
+
+  document.getElementById('b64-clear-text')!.addEventListener('click', () => {
+    txt.value = ''
+    setStatus('')
+  })
+  document.getElementById('b64-clear-b64')!.addEventListener('click', () => {
+    b64.value = ''
+    setStatus('')
+  })
+
+  const copy = async (el: HTMLTextAreaElement, label: string) => {
+    if (!el.value) {
+      setStatus('没有可复制的内容', 'err')
+      return
+    }
+    try {
+      await navigator.clipboard.writeText(el.value)
+      setStatus(`✓ 已复制${label}`, 'ok')
+    } catch {
+      el.select()
+      document.execCommand('copy')
+      setStatus(`✓ 已复制${label}`, 'ok')
+    }
+  }
+  document
+    .getElementById('b64-copy-text')!
+    .addEventListener('click', () => copy(txt, '原文'))
+  document
+    .getElementById('b64-copy-b64')!
+    .addEventListener('click', () => copy(b64, ' Base64'))
+</script>

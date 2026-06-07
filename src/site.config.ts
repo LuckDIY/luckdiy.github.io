@@ -36,6 +36,10 @@ const config: SiteConfig = {
       url: '/posts',
     },
     {
+      name: '工具箱',
+      url: '/tools',
+    },
+    {
       name: '关于我',
       url: '/about',
     },
